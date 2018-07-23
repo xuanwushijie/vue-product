@@ -75,7 +75,7 @@
 <style lang="stylus" rel="stylesheet/stylus">
   @import "../../common/stylus/mixins.styl"
   .slide-wrap
-    margin-top (140/$rem)
+    margin-top (148/$rem)
     margin-bottom (20 /$rem)
     background-color #f4f4f4
     .swiper

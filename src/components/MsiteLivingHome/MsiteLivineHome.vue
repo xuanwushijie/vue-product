@@ -1,8 +1,8 @@
 <template>
-  <div class="jujia-wrap">
-    <div class="jujia-container" >
+  <div class="livingHome-wrap">
+    <div class="livingHome-container" >
       <h3 class="title">居家好物</h3>
-      <div class="jujia-content">
+      <div class="livingHome-content">
         <ul class="list">
           <li class="item">
             <a href="/" class="good">
@@ -119,10 +119,10 @@
 <style lang="stylus" rel="stylesheet/stylus">
   @import "../../common/stylus/mixins.styl"
 
-  .jujia-wrap
+  .livingHome-wrap
     margin-bottom (20/$rem)
     background-color #fff
-    .jujia-container
+    .livingHome-container
       background-color #f4f4f4
       .title
         line-height (120/$rem)
@@ -130,7 +130,7 @@
         font-size (28/$rem)
         color #333
         background-color #fff
-      .jujia-content
+      .livingHome-content
         background-color #fff
         .list
           overflow hidden //清除浮动

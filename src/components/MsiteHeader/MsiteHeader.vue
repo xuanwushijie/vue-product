@@ -8,21 +8,23 @@
         <span class="serach-content">搜索商品，共97565款好物</span>
       </div>
     </header>
-    <div class="header-scroll">
-      <ul class="list">
-        <li class="tab tab-bottom"><span class="txt">推荐</span></li>
-        <li class="tab"><span class="txt">居家</span></li>
-        <li class="tab"><span class="txt">配件</span></li>
-        <li class="tab"><span class="txt">服装</span></li>
-        <li class="tab"><span class="txt">电器</span></li>
-        <li class="tab"><span class="txt">洗护</span></li>
-        <li class="tab"><span class="txt">饮食</span></li>
-        <li class="tab"><span class="txt">餐厨</span></li>
-        <li class="tab"><span class="txt">婴童</span></li>
-        <li class="tab"><span class="txt">文体</span></li>
-        <li class="tab"><span class="txt">特色区</span></li>
-      </ul>
-    </div>
+   <div class="wrap-better">
+     <div class="header-scroll">
+       <ul class="list">
+         <li class="tab tab-bottom"><span class="txt">推荐</span></li>
+         <li class="tab"><span class="txt">居家</span></li>
+         <li class="tab"><span class="txt">配件</span></li>
+         <li class="tab"><span class="txt">服装</span></li>
+         <li class="tab"><span class="txt">电器</span></li>
+         <li class="tab"><span class="txt">洗护</span></li>
+         <li class="tab"><span class="txt">饮食</span></li>
+         <li class="tab"><span class="txt">餐厨</span></li>
+         <li class="tab"><span class="txt">婴童</span></li>
+         <li class="tab"><span class="txt">文体</span></li>
+         <li class="tab"><span class="txt">特色区</span></li>
+       </ul>
+     </div>
+   </div>
   </div>
 </template>
 <script>
@@ -82,19 +84,21 @@
         .serach-content
           color #666
           display block
-    .header-scroll
-      width 100%
-      overflow hidden
-      .list
-        float left
-        white-space nowrap
-        .tab
-          display inline-block
-          padding (0 30/$rem)
-          .txt
-            font-size (28/$rem)
-            text-align center
-          &.tab-bottom
-            border-bottom (4/$rem) red solid
+    .wrap-better
+      margin-top (-(16/$rem))
+      .header-scroll
+        width 100%
+        overflow hidden
+        .list
+          float left
+          white-space nowrap
+          .tab
+            display inline-block
+            padding (0 30/$rem)
+            .txt
+              font-size (28/$rem)
+              text-align center
+            &.tab-bottom
+              border-bottom (4/$rem) red solid
 
 </style>
