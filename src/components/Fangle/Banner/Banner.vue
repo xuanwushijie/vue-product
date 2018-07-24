@@ -3,20 +3,12 @@
     <div class="banner">
       <div class="swiper-container">
         <div class="swiper-wrapper">
-          <a href="/" class="swiper-slide my-slide"  >
-            <img src="./images/01.jpg" alt="">
+          <a href="/" class="swiper-slide my-slide" v-for="(banner, index) in banners" :key="index">
+            <img :src="banner.picUrl" alt="">
             <div class="content">
-              <div class="sub-title">严选推荐</div>
-              <div class="title">逆水寒必胜实用装备</div>
-              <div class="desc">给你会呼吸的江湖</div>
-            </div>
-          </a>
-          <a href="/" class="swiper-slide my-slide"  >
-            <img src="./images/02.jpg" alt="">
-            <div class="content">
-              <div class="sub-title">严选推荐</div>
-              <div class="title">逆水寒必胜实用装备</div>
-              <div class="desc">给你会呼吸的江湖</div>
+              <div class="sub-title">{{banner.subTitle}}</div>
+              <div class="title">{{banner.title}}</div>
+              <div class="desc">{{banner.desc}}</div>
             </div>
           </a>
         </div>
@@ -28,14 +20,21 @@
 <script>
   import Swiper from 'swiper'
   import 'swiper/dist/css/swiper.min.css'
+  import {mapState} from 'vuex'
 
   export default {
+    computed: {
+      ...mapState(['banners'])
+    },
+
     mounted () {
+      this.$store.dispatch('getBanners', () => {
         this.$nextTick(() => {
           new Swiper('.swiper-container', {
             autoheight: true,   //自动填充高度
             slidesPerView: 'auto'  //保证在一页中，slide有空余时，下一个slide填补一部分
           })
+        })
       })
     }
   }

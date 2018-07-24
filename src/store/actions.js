@@ -7,7 +7,13 @@ import {
   RECEIVE_FLASHSALEINDEXVO,
   RECEIVE_TOPICLISTS,
   RECEIVE_CATELISTS,
-  RECEIVE_BANNERS
+  RECEIVE_BANNERS,
+  RECEIVE_COLUMNS,
+  RECEIVE_RECOMMEND,
+  RECEIVE_TENFIFTEENS,
+  RECEIVE_ZHENPIN,
+  RECEIVE_YXLOOK,
+  RECEIVE_FINDMORES
 } from './mutation_types'
 
 import {
@@ -19,7 +25,13 @@ import {
   reqFlashSaleIndexVO,
   reqTopicList,
   reqCateList,
-  reqBanner
+  reqBanner,
+  reqColumn,
+  reqRecommend,
+  reqTenfifteen,
+  reqZhenpin,
+  reqYxLook,
+  reqFindMore
 } from '../api'
 
 export default {
@@ -90,6 +102,51 @@ export default {
       commit(RECEIVE_BANNERS, {banners})
     }
     callBack && callBack()
+  },
+  async getColumns({commit}, callBack) {
+    const result = await reqColumn()
+    if (result.code === 0) {
+      const columns = result.data
+      commit(RECEIVE_COLUMNS, {columns})
+    }
+    callBack && callBack()
+  },
+  async getRecommend({commit}) {
+    const result = await reqRecommend()
+    if (result.code === 0) {
+      const recommend = result.data
+      commit(RECEIVE_RECOMMEND, {recommend})
+    }
+  },
+  async getTenfifteens({commit}, callBack) {
+    const result = await reqTenfifteen()
+    if (result.code === 0) {
+      const tenfifteens = result.data
+      commit(RECEIVE_TENFIFTEENS, {tenfifteens})
+    }
+    callBack && callBack()
+  },
+  async getZhenpin({commit}) {
+    const result = await reqZhenpin()
+    if (result.code === 0) {
+      const zhenpin = result.data
+      commit(RECEIVE_ZHENPIN, {zhenpin})
+    }
+  },
+  async getYxLook({commit}, callBack) {
+    const result = await reqYxLook()
+    if (result.code === 0) {
+      const yxLook = result.data
+      commit(RECEIVE_YXLOOK, {yxLook})
+    }
+    callBack && callBack()
+  },
+  async getFindMores({commit}) {
+    const result = await reqFindMore()
+    if (result.code === 0) {
+      const findMores = result.data
+      commit(RECEIVE_FINDMORES, {findMores})
+    }
   },
 
 }

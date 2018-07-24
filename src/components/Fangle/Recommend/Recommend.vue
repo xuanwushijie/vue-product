@@ -3,56 +3,37 @@
     <div class="container">
       <div class="title">为你推荐</div>
       <a href="/" class="post-item">
-        <div class="img-container" >
+        <div class="img-container" v-if="recommend.recommendBanner" :style="{backgroundImage:'url('+recommend.recommendBanner.picUrl+')'}">
           <div class="tag">
-            <div class="content">严选推荐</div>
+            <div class="content">{{recommend.recommendBanner.nickname}}</div>
           </div>
         </div>
         <div class="topic-info">
           <div class="line1">
-            <div class="line1-title"> 选择一种风格，选择一种人生</div>
+            <div class="line1-title" v-if="recommend.recommendBanner">{{recommend.recommendBanner.title}}</div>
             <div class="price">
-              <span class="num">15.6 </span>
+              <span class="num" v-if="recommend.recommendBanner">{{recommend.recommendBanner.priceInfo}}</span>
               <span class="unit">元起</span>
             </div>
           </div>
-          <div class="line2">ins风、北欧风、复古风等数十款好物限时特价</div>
+          <div class="line2" v-if="recommend.recommendBanner">{{recommend.recommendBanner.subtitle}}</div>
         </div>
       </a>
-      <a href="/" class="minor-item" >
+      <a href="/" class="minor-item" v-for="(rec, index) in recommend.recommends" :key="index">
         <div class="minor-topic">
           <div class="author">
             <div class="avatar">
-              <img src="//yanxuan.nosdn.127.net/3d88b7b9fb0e1e617313c2d48beda7f1.png?imageView&quality=75&thumbnail=48y48" alt="">
+              <img :src="rec.avatar" alt="">
             </div>
-            <div class="nickname">丁磊</div>
+            <div class="nickname">{{rec.nickname}}</div>
           </div>
-          <div class="line1">优质的成熟蜜千里挑一</div>
-          <div class="line2">成熟洋槐蜜限时45元</div>
+          <div class="line1">{{rec.title}}</div>
+          <div class="line2">{{rec.subtitle}}</div>
         </div>
         <div class="minor-pic">
-          <div class="img-container" >
+          <div class="img-container" :style="{backgroundImage:'url('+rec.picUrl+')'}">
             <div class="tag">
-              <div class="content">丁磊的好货推荐</div>
-            </div>
-          </div>
-        </div>
-      </a>
-      <a href="/" class="minor-item" >
-        <div class="minor-topic">
-          <div class="author">
-            <div class="avatar">
-              <img src="//yanxuan.nosdn.127.net/3d88b7b9fb0e1e617313c2d48beda7f1.png?imageView&quality=75&thumbnail=48y48" alt="">
-            </div>
-            <div class="nickname">丁磊</div>
-          </div>
-          <div class="line1">优质的成熟蜜千里挑一</div>
-          <div class="line2">成熟洋槐蜜限时45元</div>
-        </div>
-        <div class="minor-pic">
-          <div class="img-container" >
-            <div class="tag">
-              <div class="content">丁磊的好货推荐</div>
+              <div class="content">{{rec.typeName}}</div>
             </div>
           </div>
         </div>
@@ -61,11 +42,17 @@
   </div>
 </template>
 
-<script>
 
+<script>
+import {mapState} from 'vuex'
 
   export default {
-
+  computed: {
+    ...mapState(['recommend'])
+  },
+    mounted () {
+    this.$store.dispatch('getRecommend')
+    }
 
   }
 </script>

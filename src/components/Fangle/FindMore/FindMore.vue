@@ -4,27 +4,40 @@
       <span class="inner">更多精彩</span>
     </div>
     <div class="content">
-      <a href="/" class="topic-item" >
-        <div class="img-container onePic"></div>
-        <div class="desc">严选原创设计 风袅桃溪系列首发</div>
-      </a>
-      <a href="/" class="topic-item" >
-        <div class="img-container onePic"></div>
-        <div class="desc">严选原创设计 风袅桃溪系列首发</div>
-      </a>
-      <a href="/" class="topic-item" >
-        <div class="img-container onePic"></div>
-        <div class="desc">严选原创设计 风袅桃溪系列首发</div>
+      <a href="/" class="topic-item" v-for="(findMore, index) in findMores" :key="index">
+        <div class="img-container onePic" :style="{backgroundImage:'url('+findMore.itemPicUrl+')'}"
+             v-if="findMore.picList.length === 0"></div>
+
+        <div class="three-pics" v-if="findMore.picList.length !== 0">
+          <div class="img-container pic1" :style="{backgroundImage:'url('+findMore.picList[0]+')'}"></div>
+          <div class="right">
+            <div class="img-container pic2" :style="{backgroundImage:'url('+findMore.picList[1]+')'}"></div>
+            <div class="img-container pic3" :style="{backgroundImage:'url('+findMore.picList[2]+')'}"></div>
+          </div>
+        </div>
+
+        <div class="desc">{{findMore.subtitle}}</div>
       </a>
     </div>
   </div>
 </template>
 
+
 <script>
+  import {mapState} from 'vuex'
 
   export default {
+    name: "findmore",
+    computed: {
+      ...mapState(['findMores'])
+    },
+    mounted () {
+      this.$store.dispatch('getFindMores')
+    }
+
   }
 </script>
+
 
 <style lang="stylus" rel="stylesheet/stylus">
   @import "../../../common/stylus/mixins.styl"

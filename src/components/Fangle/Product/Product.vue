@@ -3,23 +3,23 @@
     <div class="container">
       <div class="title">严选甄品</div>
       <a href="/" class="post-item">
-        <div class="img-container" >
+        <div class="img-container" v-if="zhenpin.zhenOne" :style="{backgroundImage:'url('+zhenpin.zhenOne.picUrl+')'}">
           <div class="tag">
-            <div class="content">严选推荐</div>
+            <div class="content">{{zhenpin.zhenOne.nickname}}</div>
           </div>
         </div>
         <div class="topic-info">
           <div class="line1">
-            <div class="line1-title">选择一种风格，选择一种人生</div>
+            <div class="line1-title" v-if="zhenpin.zhenOne">{{zhenpin.zhenOne.title}}</div>
             <!--<div class="price">-->
             <!--<span class="num">{{zhenpin.zhenOne.priceInfo}}</span>-->
             <!--<span class="unit">元起</span>-->
             <!--</div>-->
           </div>
-          <div class="line2" >ins风、北欧风、复古风等数十款好物限时特价</div>
+          <div class="line2" v-if="zhenpin.zhenOne">{{zhenpin.zhenOne.subtitle}}</div>
         </div>
       </a>
-      <a href="/" class="minor-item" >
+      <a href="/" class="minor-item" v-for="(zhen, index) in zhenpin.zhenpins" :key="index">
         <div class="minor-topic">
           <!--<div class="author">-->
           <!--<div class="avatar">-->
@@ -27,32 +27,13 @@
           <!--</div>-->
           <!--<div class="nickname">{{zhen.nickname}}</div>-->
           <!--</div>-->
-          <div class="line1">优质的成熟蜜千里挑一</div>
-          <div class="line2">成熟洋槐蜜限时</div>
+          <div class="line1">{{zhen.title}}</div>
+          <div class="line2">{{zhen.subtitle}}</div>
         </div>
         <div class="minor-pic">
-          <div class="img-container" >
+          <div class="img-container" :style="{backgroundImage:'url('+zhen.picUrl+')'}">
             <div class="tag">
-              <div class="content">严选推荐</div>
-            </div>
-          </div>
-        </div>
-      </a>
-      <a href="/" class="minor-item" >
-        <div class="minor-topic">
-          <!--<div class="author">-->
-          <!--<div class="avatar">-->
-          <!--<img :src="zhen.avatar" alt="">-->
-          <!--</div>-->
-          <!--<div class="nickname">{{zhen.nickname}}</div>-->
-          <!--</div>-->
-          <div class="line1">优质的成熟蜜千里挑一</div>
-          <div class="line2">成熟洋槐蜜限时</div>
-        </div>
-        <div class="minor-pic">
-          <div class="img-container" >
-            <div class="tag">
-              <div class="content">严选推荐</div>
+              <div class="content">{{zhen.typeName}}</div>
             </div>
           </div>
         </div>
@@ -61,9 +42,18 @@
   </div>
 </template>
 
+
 <script>
+  import {mapState} from 'vuex'
 
   export default {
+    computed: {
+      ...mapState(['zhenpin'])
+    },
+    mounted () {
+      this.$store.dispatch('getZhenpin')
+
+    }
   }
 </script>
 

@@ -4,17 +4,17 @@
       <div class="title">十点一刻</div>
       <div class="swiper-container">
         <ul class="list swiper-wrapper">
-          <a href="/" class="item swiper-slide">
+          <a href="/" class="item swiper-slide" v-for="(tenfifteen, index) in tenfifteens" :key="index">
             <div class="line-title">
               <span class="line-title-content">今日话题</span>
             </div>
-            <div class="item-title">关于单身</div>
-            <div class="desc">聊聊单身的好处</div>
+            <div class="item-title">{{tenfifteen.title}}</div>
+            <div class="desc">{{tenfifteen.desc}}</div>
             <div class="join-info">
               <div class="join-inner">
                 <div class="avatars">
-                  <div class="avatar" >
-                    <img class="avatar-img" src="//yanxuan.nosdn.127.net/b92131d94231d4f79a35fd0cce833837?imageView&thumbnail=48y48" alt="">
+                  <div class="avatar" v-for="(partic, index) in tenfifteen.participantAvatar" :key="index">
+                    <img class="avatar-img" :src="partic ? partic : '/images/01.png'" alt="">
                   </div>
                   <div class="avatar">
                     <span class="dot"></span>
@@ -23,32 +23,7 @@
                   </div>
                 </div>
                 <div class="join">
-                  <span>1204</span>
-                  <span>人参与话题</span>
-                </div>
-              </div>
-            </div>
-          </a>
-          <a href="/" class="item swiper-slide">
-            <div class="line-title">
-              <span class="line-title-content">今日话题</span>
-            </div>
-            <div class="item-title">关于单身</div>
-            <div class="desc">聊聊单身的好处</div>
-            <div class="join-info">
-              <div class="join-inner">
-                <div class="avatars">
-                  <div class="avatar" >
-                    <img class="avatar-img" src="//yanxuan.nosdn.127.net/b92131d94231d4f79a35fd0cce833837?imageView&thumbnail=48y48" alt="">
-                  </div>
-                  <div class="avatar">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                  </div>
-                </div>
-                <div class="join">
-                  <span>1204</span>
+                  <span>{{tenfifteen.participantNum}}</span>
                   <span>人参与话题</span>
                 </div>
               </div>
@@ -66,13 +41,18 @@
   </div>
 </template>
 
+
 <script>
   import Swiper from 'swiper'
   import 'swiper/dist/css/swiper.min.css'
+  import {mapState} from 'vuex'
 
   export default {
-
+    computed: {
+      ...mapState(['tenfifteens'])
+    },
     mounted () {
+      this.$store.dispatch('getTenfifteens', () => {
         this.$nextTick(() => {
           new Swiper('.swiper-container', {
             initialSlide: 0,
@@ -80,6 +60,7 @@
             slidesPerView: 'auto',  //保证在一页中，slide有空余时，下一个slide填补一部分
           })
 
+        })
       })
     }
   }

@@ -2,19 +2,19 @@
   <div class="look-wrap">
     <div class="title">严选LOOK</div>
     <a href="/" class="content">
-      <img src="//yanxuan.nosdn.127.net/748d1062e3337b38226d7126c4afe631.jpg?imageView&quality=75" alt="" class="scene-pic">
+      <img :src="yxLook.picUrl" alt="" class="scene-pic">
       <div class="topic-info">
         <div class="author-container">
           <div class="avatar">
-            <img src="images/01.jpg" alt="">
+            <img :src="yxLook.avatar" alt="">
           </div>
-          <div class="nickname">m15902775488_1</div>
+          <div class="nickname">{{yxLook.nickname}}</div>
         </div>
-        <div class="desc">比一般的青柑稍大，清香和普洱的陈香结合，满意。希望多做优惠活动。</div>
+        <div class="desc">{{yxLook.content}}</div>
       </div>
       <div class="tag">
         <transition name="fade">
-          <div class="center"></div>
+          <div v-show="show" class="center"></div>
         </transition>
       </div>
 
@@ -22,10 +22,30 @@
   </div>
 </template>
 
+
 <script>
+  import {mapState} from 'vuex'
 
   export default {
+    name: "look",
+    data () {
+      return {
+        show: true
+      }
+    },
+    computed: {
+      ...mapState(['yxLook'])
+    },
+    mounted () {
+      this.$store.dispatch('getYxLook', () => {
+        setInterval(() => {
+          this.show = !this.show
+        },600)
+      })
+    }
+
   }
+
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">

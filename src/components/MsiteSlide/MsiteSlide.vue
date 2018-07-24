@@ -41,23 +41,22 @@
   import 'swiper/dist/css/swiper.min.css'
 
   export default {
-
     mounted () {
-      this.$store.dispatch('getFocusList')
+      this.$store.dispatch('getFocusList');
     },
     computed: {
       ...mapState(['focusLists'])
     },
     watch: {
       focusLists(val){
-        console.log(this.focusLists)
+        console.log(this.val)
         this.$nextTick( () => {
-          new Swiper('.swiper-container', {
-            pagination: {
-              el: '.swiper-pagination',
-            },
-            loop: true
-          })
+            new Swiper('.swiper-container', {
+              pagination: {
+                el: '.swiper-pagination',
+              },
+              loop: true
+            })
         })
       }
     }

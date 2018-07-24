@@ -9,10 +9,10 @@ export default {
   cateLists: [],    //居家及以下所有
 
   banners: [],    //识物banner
-  columns: [],   //banner下面的channel
+  columns: [],
   recommend: {},   //为你推荐
   tenfifteens: [],    //十点一刻
   zhenpin: {},   //严选甄品
   yxLook: {},    //严选LOOK
-  findMores: [],    //更多精选
+  findMores: []    //更多精选//banner下面的channel
 }

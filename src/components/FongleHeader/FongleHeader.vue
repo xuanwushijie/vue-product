@@ -1,6 +1,6 @@
 <template>
-  <header class="hd">
-    <div class="top-bar">
+  <div class="fongle-header1">
+    <div class="top-bar1">
       <div class="icon-home"></div>
       <div class="icon-logo-wrap">
         <i class="logo-wrap"></i>
@@ -14,22 +14,24 @@
         </a>
       </div>
     </div>
-  </header>
+  </div>
 </template>
 <script>
   export default {}
 </script>
-<style lang="stylus" rel="stylesheet/stylus" scoped>
+
+
+<style lang="stylus" rel="stylesheet/stylus">
   @import "../../common/stylus/mixins.styl"
 
-  .hd
+  .fongle-header1
     position fixed!important
     left 0
     top 0
     width 100%
     height (87/$rem)
     z-index 2
-    .top-bar
+    .top-bar1
       background-color #fafafa
       height 100%
       padding (0 16/$rem 0 24/$rem)

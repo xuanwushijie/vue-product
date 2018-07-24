@@ -2,54 +2,12 @@
   <div class="channel-wrap">
     <div class="swiper-container">
       <div class="swiper-wrapper list">
-        <a href="/" class="swiper-slide my-slide" >
-          <img src="./images/01.png" alt="">
+        <a href="/" class="swiper-slide my-slide" v-for="(column, index) in columns" :key="index">
+          <img :src="column.picUrl" alt="">
           <div class="top-num-wrap">
-            <div class="top-num">51篇文章</div>
+            <div class="top-num">{{column.articleCount}}</div>
           </div>
-          <div class="title">丁磊的好货推荐</div>
-        </a>
-        <a href="/" class="swiper-slide my-slide" >
-          <img src="./images/02.png" alt="">
-          <div class="top-num-wrap">
-            <div class="top-num">51篇文章</div>
-          </div>
-          <div class="title">丁磊的好货推荐</div>
-        </a>
-        <a href="/" class="swiper-slide my-slide" >
-          <img src="./images/03.png" alt="">
-          <div class="top-num-wrap">
-            <div class="top-num">51篇文章</div>
-          </div>
-          <div class="title">丁磊的好货推荐</div>
-        </a>
-        <a href="/" class="swiper-slide my-slide" >
-          <img src="./images/04.png" alt="">
-          <div class="top-num-wrap">
-            <div class="top-num">51篇文章</div>
-          </div>
-          <div class="title">丁磊的好货推荐</div>
-        </a>
-        <a href="/" class="swiper-slide my-slide" >
-          <img src="./images/05.png" alt="">
-          <div class="top-num-wrap">
-            <div class="top-num">51篇文章</div>
-          </div>
-          <div class="title">丁磊的好货推荐</div>
-        </a>
-        <a href="/" class="swiper-slide my-slide" >
-          <img src="./images/06.png" alt="">
-          <div class="top-num-wrap">
-            <div class="top-num">51篇文章</div>
-          </div>
-          <div class="title">丁磊的好货推荐</div>
-        </a>
-        <a href="/" class="swiper-slide my-slide" >
-          <img src="./images/07.png" alt="">
-          <div class="top-num-wrap">
-            <div class="top-num">51篇文章</div>
-          </div>
-          <div class="title">丁磊的好货推荐</div>
+          <div class="title">{{column.title}}</div>
         </a>
       </div>
     </div>
@@ -59,14 +17,19 @@
 <script>
   import Swiper from 'swiper'
   import 'swiper/dist/css/swiper.min.css'
+  import {mapState} from 'vuex'
 
   export default {
+    computed: {
+      ...mapState(['columns'])
+    },
     mounted () {
       /*
       * 因为自定义了分液器的样式，在渲染时，可能比默认的慢，
       *   这样就导致了轮播图无法滑动，
       *   所以要等到获取到数据之后，在创建Swiper实例
       * */
+      this.$store.dispatch('getColumns')
         this.$nextTick(() => {
           new Swiper('.swiper-container', {
             initialSilde:0,   //这样，可能保证不出一直原位置滑动的BUG
