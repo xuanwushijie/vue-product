@@ -15,17 +15,17 @@
             <div class="next-title">
               <span class="rows">
                 <span class="item">下一场</span>
-                <span class="item">14:00</span>
+                <span class="item">{{flashSaleIndexVO.nextStartTime | data-format}}</span>
                 <span class="item">开始</span>
               </span>
             </div>
           </div>
           <div class="right-item">
-            <img src="./images/limitTime/01.png" alt="">
+            <img :src="flashSaleIndexVO.primaryPicUrl" alt="">
             <div class="price">
               <div class="price-now">
                 <span class="rmb1">￥</span>
-                <span>35</span>
+                <span>{{flashSaleIndexVO.originPrice}}</span>
               </div>
               <div class="price-before">
                 <span class="rmb2">￥</span>
@@ -37,12 +37,20 @@
       </a>
     </div>
     <div class="welfare">
-      <a></a>
+      <a href="/" v-if="flashSaleIndexVO.saleIndexVO" :style="{backgroundImage: 'url('+flashSaleIndexVO.saleIndexVO.picUrl+')' }"></a>
     </div>
   </div>
 </template>
 <script>
-  export default {}
+  import {mapState} from 'vuex'
+  export default {
+    computed: {
+      ...mapState(['flashSaleIndexVO'])
+    },
+    mounted () {
+      this.$store.dispatch('getFlashSaleIndexVO')
+    }
+  }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
   @import "../../common/stylus/mixins.styl"

@@ -1,104 +1,33 @@
 <template>
   <div class="livingHome-wrap">
-    <div class="livingHome-container" >
-      <h3 class="title">居家好物</h3>
+    <div class="livingHome-container" v-for="(cateList, index) in cateLists" :key="index">
+      <h3 class="title">{{cateList.name}}</h3>
       <div class="livingHome-content">
         <ul class="list">
-          <li class="item">
+          <li class="item" v-for="(cateL, index) in cateList.itemList" :key="index">
             <a href="/" class="good">
               <div class="hd">
-                <img src="./images/jujia/01.png" alt="">
-                <div class="desc">自由变化，贴心承托可拆洗</div>
+                <img :src="cateL.primaryPicUrl" alt="">
+                <div class="desc">{{cateL.simpleDesc}}</div>
               </div>
               <div class="tag-wrap">
                 <span class="tag">满额减</span>
               </div>
               <div class="name">
-                <span>自由变化，贴心承托可拆洗</span>
+                <span>{{cateL.name}}</span>
               </div>
               <div class="price">
                 <span>￥</span>
-                <span>2243</span>
+                <span>{{cateL.retailPrice}}</span>
               </div>
             </a>
           </li>
-          <li class="item">
-            <a href="/" class="good">
-              <div class="hd">
-                <img src="./images/jujia/02.png" alt="">
-                <div class="desc">自由变化，贴心承托可拆洗</div>
-              </div>
-              <div class="tag-wrap">
-                <span class="tag">满额减</span>
-              </div>
-              <div class="name">
-                <span>自由变化，贴心承托可拆洗</span>
-              </div>
-              <div class="price">
-                <span>￥</span>
-                <span>2243</span>
-              </div>
-            </a>
-          </li>
-          <li class="item">
-            <a href="/" class="good">
-              <div class="hd">
-                <img src="./images/jujia/03.png" alt="">
-                <div class="desc">自由变化，贴心承托可拆洗</div>
-              </div>
-              <div class="tag-wrap">
-                <span class="tag">满额减</span>
-              </div>
-              <div class="name">
-                <span>自由变化，贴心承托可拆洗</span>
-              </div>
-              <div class="price">
-                <span>￥</span>
-                <span>2243</span>
-              </div>
-            </a>
-          </li>
-          <li class="item">
-            <a href="/" class="good">
-              <div class="hd">
-                <img src="./images/jujia/04.png" alt="">
-                <div class="desc">自由变化，贴心承托可拆洗</div>
-              </div>
-              <div class="tag-wrap">
-                <span class="tag">满额减</span>
-              </div>
-              <div class="name">
-                <span>自由变化，贴心承托可拆洗</span>
-              </div>
-              <div class="price">
-                <span>￥</span>
-                <span>2243</span>
-              </div>
-            </a>
-          </li>
-          <li class="item">
-            <a href="/" class="good">
-              <div class="hd">
-                <img src="./images/jujia/05.png" alt="">
-                <div class="desc">自由变化，贴心承托可拆洗</div>
-              </div>
-              <div class="tag-wrap">
-                <span class="tag">满额减</span>
-              </div>
-              <div class="name">
-                <span>自由变化，贴心承托可拆洗</span>
-              </div>
-              <div class="price">
-                <span>￥</span>
-                <span>2243</span>
-              </div>
-            </a>
-          </li>
+
           <li class="item more">
             <a href="/" class="good">
               <p class="txt">
                 <span>更多</span>
-                <span>居家好物</span>
+                <span>{{cateList.name}}好物</span>
               </p>
               <i class="icon"></i>
             </a>
@@ -110,9 +39,14 @@
 </template>
 
 <script>
-
+import {mapState} from 'vuex'
   export default {
-
+  computed: {
+    ...mapState(['cateLists'])
+  },
+    mounted () {
+    this.$store.dispatch('getCateLists')
+    }
   }
 </script>
 

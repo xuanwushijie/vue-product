@@ -6,41 +6,11 @@
     <div class="product-container">
       <div class="swiper-inner2 ">
         <ul class="list swiper-wrapper" >
-          <li class="item swiper-slide" ><a href="">
-            <div class="img-wrap"><img src="./images/newProduct/01.png" alt="">
+          <li class="item swiper-slide" v-for="(newItemList, index) in newItemLists" :key="index"><a href="">
+            <div class="img-wrap"><img :src="newItemList.listPicUrl" alt="">
             </div>
-            <span class="name">拉格啤酒 330毫升*24罐/箱</span> <span class="name-desc">清醇透爽，畅享欢聚时刻</span>
-            <div class="name-price"><span>￥108</span></div>
-          </a></li>
-          <li class="item swiper-slide"><a href="">
-            <div class="img-wrap"><img src="./images/newProduct/02.png" alt="">
-            </div>
-            <span class="name">男式羽毛球鞋</span> <span class="name-desc">科技材质，体验“小飞人”的轻盈穿着</span>
-            <div class="name-price"><span>￥269</span></div>
-          </a></li>
-          <li class="item swiper-slide" ><a href="">
-            <div class="img-wrap"><img src="./images/newProduct/03.png" alt="">
-            </div>
-            <span class="name">双层封口咔咔密实袋</span> <span class="name-desc">生活，如你所见的新鲜</span>
-            <div class="name-price"><span>￥12.9</span></div>
-          </a></li>
-          <li class="item swiper-slide" ><a href="">
-            <div class="img-wrap"><img src="./images/newProduct/04.png" alt="">
-            </div>
-            <span class="name">小龙虾 4-6钱 1千克/盒 （800克虾+200克汤）</span> <span class="name-desc">夏季爆品，媲美现煮</span>
-            <div class="name-price"><span>￥88</span></div>
-          </a></li>
-          <li class="item swiper-slide" ><a href="">
-            <div class="img-wrap"><img src="./images/newProduct/05.png" alt="">
-            </div>
-            <span class="name">花漾初绽四件套</span> <span class="name-desc">独家花漾设计，纯棉透气亲肤</span>
-            <div class="name-price"><span>￥299</span></div>
-          </a></li>
-          <li class="item swiper-slide" ><a href="">
-            <div class="img-wrap"><img src="./images/newProduct/06.png" alt="">
-            </div>
-            <span class="name">男士清凉透气超轻休闲鞋</span> <span class="name-desc">舒适透气，自在如风的畅快感</span>
-            <div class="name-price"><span>￥</span> <span>299</span></div>
+            <span class="name">{{newItemList.name}}</span> <span class="name-desc">{{newItemList.simpleDesc}}</span>
+            <div class="name-price"><span>￥{{newItemList.retailPrice}}</span></div>
           </a></li>
           <li class="item swiper-slide"><a href="" class="itemWord"><span class="txt">查看全部</span></a></li>
         </ul>
@@ -52,16 +22,23 @@
 <script>
   import Swiper from 'swiper'
   import 'swiper/dist/css/swiper.min.css'
+  import {mapState} from 'vuex'
 
 
   export default {
+    computed: {
+      ...mapState(['newItemLists'])
+    },
     mounted() {
-      this.$nextTick(() => {
-        new Swiper('.swiper-inner2', {
-          autoheight: true,   //自动填充高度
-          width: 140
+      this.$store.dispatch('getNewItemList',() => {
+        this.$nextTick(() => {
+          new Swiper('.swiper-inner2', {
+            autoheight: true,   //自动填充高度
+            width: 140
+          })
         })
       })
+
     }
   }
 </script>

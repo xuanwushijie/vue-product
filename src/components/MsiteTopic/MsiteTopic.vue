@@ -10,48 +10,21 @@
     <div class="topic-slide">
       <div class="topic-inner swiper-container">
         <ul class="list swiper-wrapper">
-          <li class="item swiper-slide" >
+          <li class="item swiper-slide" v-for="(topicList,index) in topicLists" :key="index">
             <a href="/" class="img-wrap">
-              <img src="./images/topic/01.jpg" alt="">
+              <img :src="topicList.itemPicUrl " alt="">
             </a>
             <div class="content">
-              <h4 class="title">青汁兑蜂蜜, 轻盈又甜蜜</h4>
+              <h4 class="title">{{topicList.title}}</h4>
               <!--这个不一定有-->
               <span class="price">
-                  <span>129</span>
+                  <span>{{topicList.priceInfo}}</span>
                   <span>元起</span>
                 </span>
             </div>
-            <div class="desc">青汁兑蜂蜜, 轻盈又甜蜜</div>
+            <div class="desc">{{topicList.subtitle}}</div>
           </li>
-          <li class="item swiper-slide" >
-            <a href="/" class="img-wrap">
-              <img src="./images/topic/02.jpg" alt="">
-            </a>
-            <div class="content">
-              <h4 class="title">青汁兑蜂蜜, 轻盈又甜蜜</h4>
-              <!--这个不一定有-->
-              <span class="price">
-                  <span>129</span>
-                  <span>元起</span>
-                </span>
-            </div>
-            <div class="desc">青汁兑蜂蜜, 轻盈又甜蜜</div>
-          </li>
-          <li class="item swiper-slide" >
-            <a href="/" class="img-wrap">
-              <img src="./images/topic/03.jpg" alt="">
-            </a>
-            <div class="content">
-              <h4 class="title">青汁兑蜂蜜, 轻盈又甜蜜</h4>
-              <!--这个不一定有-->
-              <span class="price">
-                  <span>129</span>
-                  <span>元起</span>
-                </span>
-            </div>
-            <div class="desc">青汁兑蜂蜜, 轻盈又甜蜜</div>
-          </li>
+
         </ul>
       </div>
     </div>
@@ -61,16 +34,22 @@
 <script>
   import Swiper from 'swiper'
   import 'swiper/dist/css/swiper.min.css'
+  import {mapState} from 'vuex'
   export default {
-
+    computed: {
+      ...mapState(['topicLists'])
+    },
 
     mounted () {
+      this.$store.dispatch('getTopicLists', () => {
         this.$nextTick(() => {
           new Swiper('.topic-inner', {
             autoheight: true,   //自动填充高度
-            slidesPerView: 'auto',  //保证在一页中，slide有空余时，下一个slide填补一部分
+            slidesPerView: 'auto' //保证在一页中，slide有空余时，下一个slide填补一部分
           })
         })
+      })
+
       }
 
   }

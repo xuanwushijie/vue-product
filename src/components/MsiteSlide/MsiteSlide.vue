@@ -1,35 +1,14 @@
 <template>
   <div class="slide-wrap">
     <div class="swiper">
-      <div class="swiper-container swiper-inner1">
+      <div class="swiper-container swiper-inner1" v-if="focusLists.length">
         <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <img src="./images/01.jpg" alt="">
-          </div>
-          <div class="swiper-slide">
-            <img src="./images/02.jpg" alt="">
-          </div>
-          <div class="swiper-slide">
-            <img src="./images/03.jpg" alt="">
-          </div>
-          <div class="swiper-slide">
-            <img src="./images/04.jpg" alt="">
-          </div>
-          <div class="swiper-slide">
-            <img src="./images/05.jpg" alt="">
-          </div>
-          <div class="swiper-slide">
-            <img src="./images/06.jpg" alt="">
-          </div>
-          <div class="swiper-slide">
-            <img src="./images/07.jpg" alt="">
-          </div>
-          <div class="swiper-slide">
-            <img src="./images/08.jpg" alt="">
+          <div class="swiper-slide" v-for="(focusList, index) in focusLists" :key="index">
+            <img :src="focusList.picUrl" alt="">
           </div>
         </div>
         <!-- 如果需要分页器 -->
-        <div class="my-swiper-pagination swiper-pagination"></div>
+        <div class="swiper-pagination"></div>
       </div>
     </div>
     <div class="footer-container">
@@ -57,17 +36,30 @@
   </div>
 </template>
 <script>
+  import {mapState} from 'vuex'
   import Swiper from 'swiper'
   import 'swiper/dist/css/swiper.min.css'
 
   export default {
+
     mounted () {
-      new Swiper('.swiper-container', {
-        pagination: {
-          el: '.swiper-pagination',
-        },
-        loop: true
-      })
+      this.$store.dispatch('getFocusList')
+    },
+    computed: {
+      ...mapState(['focusLists'])
+    },
+    watch: {
+      focusLists(val){
+        console.log(this.focusLists)
+        this.$nextTick( () => {
+          new Swiper('.swiper-container', {
+            pagination: {
+              el: '.swiper-pagination',
+            },
+            loop: true
+          })
+        })
+      }
     }
 
   }

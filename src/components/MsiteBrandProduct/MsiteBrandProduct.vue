@@ -8,35 +8,11 @@
     </div>
     <div class="container">
       <ul class="list">
-        <li class="item ">
+        <li v-if="tagList" class="item " v-for="(tagList, index) in tagListsFliter" :key="index">
           <a href="" >
-            <img src="./images/brand/01.png" alt="">
-          <div class="content"><h4 class="title">CK制造商</h4>
-            <div class="price"><span class="price1">25</span> <span class="price2">元起</span></div>
-          </div>
-          </a></li>
-        <li class="item item2">
-          <a href="">
-            <img src="./images/brand/02.png" alt="">
-          <div class="content"><h4 class="title">Nine West制造商</h4>
-            <div class="price"><span class="price1">199</span> <span class="price2">元起</span></div>
-          </div>
-          </a>
-        </li>
-        <li class="item item3">
-          <a href="">
-            <img src="./images/brand/03.png" alt="">
-          <div class="content"><h4 class="title">新秀丽制造商</h4>
-            <div class="price">
-              <span class="price1">49</span> <span class="price2">元起</span></div>
-          </div>
-          </a>
-        </li>
-        <li class="item item4">
-          <a href="">
-            <img src="./images/brand/04.png" alt="">
-          <div class="content"><h4 class="title">Birkenstock集团制造商</h4>
-            <div class="price"><span class="price1">59.9</span> <span class="price2">元起</span></div>
+            <img :src="tagList.picUrl" alt="">
+          <div class="content"><h4 class="title">{{tagList.name}}</h4>
+            <div class="price"><span class="price1">{{tagList.floorPrice}}</span> <span class="price2">元起</span></div>
           </div>
           </a>
         </li>
@@ -45,7 +21,22 @@
   </div>
 </template>
 <script>
-  export default {}
+  import {mapState} from 'vuex'
+  export default {
+    computed: {
+      ...mapState(['tagLists']),
+      tagListsFliter () {
+        let arr = []
+        for (var i = 0; i < 4; i++) {
+          arr.push(this.tagLists[i])
+        }
+        return arr
+      }
+    },
+    mounted () {
+      this.$store.dispatch('getTagList')
+    }
+  }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
   @import "../../common/stylus/mixins.styl"

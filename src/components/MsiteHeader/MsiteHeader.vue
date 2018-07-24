@@ -12,16 +12,8 @@
      <div class="header-scroll">
        <ul class="list">
          <li class="tab tab-bottom"><span class="txt">推荐</span></li>
-         <li class="tab"><span class="txt">居家</span></li>
-         <li class="tab"><span class="txt">配件</span></li>
-         <li class="tab"><span class="txt">服装</span></li>
-         <li class="tab"><span class="txt">电器</span></li>
-         <li class="tab"><span class="txt">洗护</span></li>
-         <li class="tab"><span class="txt">饮食</span></li>
-         <li class="tab"><span class="txt">餐厨</span></li>
-         <li class="tab"><span class="txt">婴童</span></li>
-         <li class="tab"><span class="txt">文体</span></li>
-         <li class="tab"><span class="txt">特色区</span></li>
+         <li class="tab" v-for="(headCate, index) in headCates" :key="index"><span class="txt">{{headCate.name}}</span></li>
+
        </ul>
      </div>
    </div>
@@ -29,8 +21,17 @@
 </template>
 <script>
   import BScroll from 'better-scroll'
+  import {mapState, mapActions} from 'vuex'
   export default {
+
+   /* methods: {
+      ...mapActions(['getHeeadCateList'])
+    },*/
+    computed: {
+      ...mapState(['headCates'])
+    },
     mounted() {
+      this.$store.dispatch('getHeadCateList')
       this.$nextTick(() => {
         new BScroll('.header-scroll', {
           scrollX: true,
