@@ -16,3 +16,5 @@ export const reqTenfifteen = () => ajax('/tenfifteen')
 export const reqZhenpin = () => ajax('/zhenpin')
 export const reqYxLook = () => ajax('/yxLook')
 export const reqFindMore = () => ajax('/findMore')
+
+export const reqCategoryData = () => ajax('/categoryData')
