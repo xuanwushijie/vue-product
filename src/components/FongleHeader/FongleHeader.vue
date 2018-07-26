@@ -1,7 +1,7 @@
 <template>
   <div class="fongle-header1">
     <div class="top-bar1">
-      <div class="icon-home"></div>
+      <a href="#/msite" class="icon-home"></a>
       <div class="icon-logo-wrap">
         <i class="logo-wrap"></i>
       </div>
@@ -9,7 +9,7 @@
         <a href="" class="search">
           <i class="icon-search"></i>
         </a>
-        <a href="" class="cart">
+        <a href="#/shopCart" class="cart">
           <i class="icon-cart"></i>
         </a>
       </div>
