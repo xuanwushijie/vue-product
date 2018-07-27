@@ -18,3 +18,4 @@ export const reqYxLook = () => ajax('/yxLook')
 export const reqFindMore = () => ajax('/findMore')
 
 export const reqCategoryData = () => ajax('/categoryData')
+export const reqPref = () => ajax('/pref')

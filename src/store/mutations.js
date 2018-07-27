@@ -17,6 +17,7 @@ import {
   RECEIVE_YXLOOK,
   RECEIVE_FINDMORES,
   RECEIVE_CATEGORYS,
+  RECEIVE_PREF
 } from "./mutation_types";
 
 export default {
@@ -68,5 +69,8 @@ export default {
   },
   [RECEIVE_CATEGORYS] (state, {categorys}) {
     state.categorys = categorys
-  }
+  },
+  [RECEIVE_PREF](state,{pref}){
+    state.pref=pref
+  },
 }

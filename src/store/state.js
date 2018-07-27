@@ -15,5 +15,7 @@ export default {
   zhenpin: {},   //严选甄品
   yxLook: {},    //严选LOOK
   findMores: [],   //更多精选//banner下面的channel
-  categorys: []    //分类页数据
+  categorys: [],    //分类页数据
+  pref:[]
+
 }

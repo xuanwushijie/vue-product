@@ -14,7 +14,8 @@ import {
   RECEIVE_ZHENPIN,
   RECEIVE_YXLOOK,
   RECEIVE_FINDMORES,
-  RECEIVE_CATEGORYS
+  RECEIVE_CATEGORYS,
+    RECEIVE_PREF
 } from './mutation_types'
 
 import {
@@ -33,7 +34,8 @@ import {
   reqZhenpin,
   reqYxLook,
   reqFindMore,
-  reqCategoryData
+  reqCategoryData,
+  reqPref
 } from '../api'
 
 export default {
@@ -157,6 +159,15 @@ export default {
       commit(RECEIVE_CATEGORYS, {categorys})
     }
     callBack && callBack()
-  }
+  },
+  async getPref({commit},b){
+    const result=await reqPref()
+    if(result.code===0){
+      const pref=result.data
+      commit(RECEIVE_PREF,{pref})
+      b&&b()
+    }
+  },
+
 
 }
